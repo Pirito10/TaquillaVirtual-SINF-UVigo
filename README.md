@@ -74,4 +74,4 @@ This script will insert randomized sample events, clients, and venue data.
 Refer to [`test.txt`](test/test.txt) for more realistic test cases.
 
 ## About The Code
-Refer to [`Especifications.pdf`](docs/Especifications.pdf), [`Justificaciones.pdf`](docs/Justificaciones.pdf), and [`Diagramas.jpg`](docs/Diagramas.jpg) for an in-depth explanation of the project, how the system works, the database schema and table relationships, the implemented queries and procedures, and more.
+Refer to [`Especificaciones.pdf`](docs/Especificaciones.pdf), [`Justificaciones.pdf`](docs/Justificaciones.pdf), and [`Diagramas.jpg`](docs/Diagramas.jpg) for an in-depth explanation of the project, how the system works, the database schema and table relationships, the implemented queries and procedures, and more.
