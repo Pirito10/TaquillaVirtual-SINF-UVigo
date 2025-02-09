@@ -1,0 +1,42 @@
+DROP USER IF EXISTS 'Cliente'@'%';
+CREATE USER 'Cliente'@'%' IDENTIFIED BY 'Cliente1_password';
+
+DROP USER IF EXISTS 'Administrador'@'%';
+CREATE USER 'Administrador'@'%' IDENTIFIED BY 'Admin1_password';
+
+GRANT EXECUTE ON PROCEDURE realizarCompra TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE anularCompra TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE verificarRealizarCompra TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE verificarPublicoPermitido TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE verificarLimiteEntradas TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE verificarAnularCompra TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE verificarLimiteAnulaciones TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE verificarPenalizacion TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosDisponibles TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorTitulo TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorTipo TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorProductor TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorRecinto TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorFecha TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosEntreFechas TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorTipoUsuario TO 'Cliente'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarLocalidadesDisponiblesPorEspectaculo TO 'Cliente'@'%';
+
+GRANT EXECUTE ON PROCEDURE crearEspectaculo TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE eliminarEspectaculo TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosDisponibles TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosFinalizados TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorTitulo TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorTipo TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorProductor TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorRecinto TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorFecha TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosEntreFechas TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarEspectaculosPorTipoUsuario TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarBeneficiosEspectaculo TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarRecintos TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarClientes TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarLocalidadesPorCliente TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarLocalidadesPorEspectaculo TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarLocalidadesDisponiblesPorEspectaculo TO 'Administrador'@'%';
+GRANT EXECUTE ON PROCEDURE mostrarLocalidadesNoDisponiblesPorEspectaculo TO 'Administrador'@'%';

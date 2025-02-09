@@ -1,0 +1,76 @@
+-- GENERAR DATOS
+
+java GeneradorDatos 200 1000 1 8 10 100
+
+-- CREAR BASE DE DATOS
+
+\. esquema.sql
+\. procedimientos/realizarCompra.sql
+\. procedimientos/anularCompra.sql
+\. procedimientos/crearEspectaculo.sql
+\. procedimientos/eliminarEspectaculo.sql
+\. procedimientos/requisitos/verificarAnularCompra.sql
+\. procedimientos/requisitos/verificarLimiteAnulaciones.sql
+\. procedimientos/requisitos/verificarLimiteEntradas.sql
+\. procedimientos/requisitos/verificarPenalizacion.sql
+\. procedimientos/requisitos/verificarPublicoPermitido.sql
+\. procedimientos/requisitos/verificarRealizarCompra.sql
+\. procedimientos/consultas/espectaculos.sql
+\. procedimientos/consultas/recintos.sql
+\. procedimientos/consultas/clientes.sql
+\. procedimientos/consultas/localidades.sql
+\. usuarios.sql
+\. datos/datos.sql
+
+-- CREAR ESPECTACULOS
+
+CALL crearEspectaculo('El Rey León', 'Teatro', 'Disney', 5, 10000, 1, 10, 'Gran Vía 123, Madrid', '2024-05-16', 3, 50, 'Adulto', 30.00);
+CALL crearEspectaculo('Concierto de Coldplay', 'Concierto', 'Coldplay', 10, 3, 10000, 50, 'Plaça de Catalunya 1, Barcelona', '2024-05-16', 2, 40, 'Infantil', 20.00);
+CALL crearEspectaculo('Mamma Mia!', 'Musical', 'ABBA', 8, 5, 3, 20, 'Paseo de la Castellana 456, Madrid', '2024-08-10', 4, 60, 'Adulto', 40.00);
+CALL crearEspectaculo('Ballet El Cascanueces', 'Danza', 'Compañía de Ballet de Valencia', 3, 1, 1, 5, 'Calle de la Paz 789, Valencia', '2024-09-20', 2, 30, 'Bebe', 15.00);
+CALL crearEspectaculo('Monólogos de Humor', 'Comedia', 'Risas S.A.', 4, 2, 2, 8, 'Calle Sierpes 101, Sevilla', '2024-10-05', 3, 40, 'Parado', 25.00);
+CALL crearEspectaculo('Circo de los Hermanos García', 'Circo', 'Hermanos García', 6, 3, 2, 12, 'Avenida de América 789, Madrid', '2024-11-15', 4, 50, 'Jubilado', 35.00);
+CALL crearEspectaculo('Ilusiones de Magia', 'Magia', 'Mago López', 2, 1, 1, 5, 'Rambla de Catalunya 234, Barcelona', '2024-12-01', 2, 20, 'Infantil', 20.00);
+CALL crearEspectaculo('La Traviata', 'Ópera', 'Teatro de la Ópera de Valencia', 7, 4, 3, 18, 'Plaza de la Reina 5, Valencia', '2025-01-10', 3, 60, 'Adulto', 50.00);
+CALL crearEspectaculo('Noche de Flamenco', 'Flamenco', 'Tablao Flamenco Sevilla', 1, 2, 2, 7, 'Calle Betis 1, Sevilla', '2025-02-20', 2, 25, 'Bebe', 30.00);
+CALL crearEspectaculo('Concierto de Beethoven', 'Música Clásica', 'Orquesta Filarmónica de Barcelona', 3, 3, 2, 10, 'Passeig de Gràcia 123, Barcelona', '2025-03-15', 2, 30, 'Parado', 40.00);
+
+-- ELIMINAR ESPECTACULOS
+
+CALL mostrarEspectaculosPorTitulo('Concierto de Beethoven');
+CALL eliminarEspectaculo('Concierto de Beethoven', 'Música Clásica', 'Orquesta Filarmónica de Barcelona', 'Passeig de Gràcia 123, Barcelona', '2025-03-15');
+CALL mostrarEspectaculosPorTitulo('Concierto de Beethoven');
+
+-- TIPO PUBLICO Y LIMITE ENTRADAS
+
+CALL realizarCompra(1, 'Noche de Flamenco', 'Flamenco', 'Tablao Flamenco Sevilla', 'Calle Betis 1, Sevilla', '2025-02-20', 'Adulto', 'Grada 1', 'A1');
+CALL realizarCompra(1, 'Noche de Flamenco', 'Flamenco', 'Tablao Flamenco Sevilla', 'Calle Betis 1, Sevilla', '2025-02-20', 'Bebe', 'Grada 1', 'A1');
+CALL realizarCompra(1, 'Noche de Flamenco', 'Flamenco', 'Tablao Flamenco Sevilla', 'Calle Betis 1, Sevilla', '2025-02-20', 'Bebe', 'Grada 1', 'A2');
+CALL mostrarLocalidadesPorCliente(1);
+
+-- ANULAR COMPRA
+
+CALL anularCompra(1, 'Noche de Flamenco', 'Flamenco', 'Tablao Flamenco Sevilla', 'Calle Betis 1, Sevilla', '2025-02-20', 'Grada 1', 'A1');
+CALL mostrarLocalidadesPorCliente(1);
+
+-- COMPRA FUERA DE FECHA
+
+CALL realizarCompra(1, 'El Rey León', 'Teatro', 'Disney', 'Calle Betis 1, Sevilla', '2025-02-20', 'Adulto', 'Grada 1', 'A1');
+
+-- ANULAR COMPRA CON PENALIZACION
+
+CALL realizarCompra(1, 'Concierto de Coldplay', 'Concierto', 'Coldplay', 'Plaça de Catalunya 1, Barcelona', '2024-05-16', 'Infantil', 'Grada 1', 'A1');
+CALL anularCompra(1, 'Concierto de Coldplay', 'Concierto', 'Coldplay', 'Plaça de Catalunya 1, Barcelona', '2024-05-16', 'Grada 1', 'A1');
+
+-- ANULAR COMPRA DE OTRO CLIENTE
+
+CALL realizarCompra(1, 'Mamma Mia!', 'Musical', 'ABBA', 'Paseo de la Castellana 456, Madrid', '2024-08-10', 'Adulto', 'Grada 1', 'A1');
+CALL anularCompra(2, 'Mamma Mia!', 'Musical', 'ABBA', 'Paseo de la Castellana 456, Madrid', '2024-08-10', 'Grada 1', 'A1');
+
+-- VER BENEFICIOS
+
+CALL realizarCompra(2, 'Mamma Mia!', 'Musical', 'ABBA', 'Paseo de la Castellana 456, Madrid', '2024-08-10', 'Adulto', 'Grada 1', 'A2');
+CALL realizarCompra(3, 'Mamma Mia!', 'Musical', 'ABBA', 'Paseo de la Castellana 456, Madrid', '2024-08-10', 'Adulto', 'Grada 1', 'A3');
+CALL realizarCompra(4, 'Mamma Mia!', 'Musical', 'ABBA', 'Paseo de la Castellana 456, Madrid', '2024-08-10', 'Adulto', 'Grada 1', 'A4');
+CALL realizarCompra(5, 'Mamma Mia!', 'Musical', 'ABBA', 'Paseo de la Castellana 456, Madrid', '2024-08-10', 'Adulto', 'Grada 1', 'A5');
+CALL mostrarBeneficiosEspectaculo('Mamma Mia!', 'Musical', 'ABBA', 'Paseo de la Castellana 456, Madrid', '2024-08-10');
